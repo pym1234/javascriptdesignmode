@@ -9,7 +9,31 @@
 <body>
   
   <script>
-    //单例模式
+
+    (function(){
+      //单例模式
+      var getSingle = function (fn) {
+            var _val;
+            return function() {
+              return _val || (_val = fn.apply(this,arguments));
+            }      
+          }
+          
+          var createTimeSingle = getSingle(function() {
+            return new Date();      
+          })
+        
+          var callPerSecond = function () {
+            setTimeout(() => {
+              console.log(createTimeSingle());
+              callPerSecond();
+            }, 1000)
+          } ;
+          callPerSecond();
+    })();
+    
+
+
   </script>
 </body>
   
